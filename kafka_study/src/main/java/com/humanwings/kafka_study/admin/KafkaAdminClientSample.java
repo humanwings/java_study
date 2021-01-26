@@ -11,12 +11,10 @@ import org.apache.kafka.clients.admin.DeleteTopicsResult;
 import org.apache.kafka.clients.admin.ListTopicsResult;
 import org.apache.kafka.clients.admin.NewTopic;
 
+import com.humanwings.kafka_study.common.KafkaConstants;
+
 public class KafkaAdminClientSample {
 	
-	private final static String TOPIC_NAME = "humanwings-dev"; 
-	
-	private final static String TEMP_TOPIC_NAME = "temp-topic";
-
 	public static void main(String[] args) throws Exception{
 		// 
 
@@ -34,7 +32,7 @@ public class KafkaAdminClientSample {
 		
 		Properties properties = new Properties();
 		
-		properties.setProperty(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, "35.72.34.152:9092");
+		properties.setProperty(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, KafkaConstants.BOOTSTRAP_SERVERS);
 		
 		return AdminClient.create(properties);
 	}
@@ -46,7 +44,7 @@ public class KafkaAdminClientSample {
 	 */
 	private static void createTopics(AdminClient client) {
 		
-		NewTopic topic = new NewTopic(TEMP_TOPIC_NAME, 1, (short)1);
+		NewTopic topic = new NewTopic(KafkaConstants.TEMP_TOPIC_NAME, 1, (short)1);
 		
 		CreateTopicsResult topics = client.createTopics(Arrays.asList(topic));
 		
@@ -76,7 +74,7 @@ public class KafkaAdminClientSample {
 	 */
 	private static void deleteTopic(AdminClient client) throws Exception{
 		
-		DeleteTopicsResult result = client.deleteTopics(Arrays.asList(TEMP_TOPIC_NAME));
+		DeleteTopicsResult result = client.deleteTopics(Arrays.asList(KafkaConstants.TEMP_TOPIC_NAME));
 		
 		result.all().get();
 		
