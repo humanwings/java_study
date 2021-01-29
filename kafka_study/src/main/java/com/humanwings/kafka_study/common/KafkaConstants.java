@@ -2,11 +2,10 @@ package com.humanwings.kafka_study.common;
 
 public class KafkaConstants {
 	
-	public final static String BOOTSTRAP_SERVERS = "35.72.34.152:9092"; 
+	// 18.180.226.195 3.113.247.88 52.193.40.115  52.193.40.115 35.72.34.152
+	public final static String BOOTSTRAP_SERVERS = "3.113.247.88:9092"; 
 	
-	public final static String TOPIC_NAME = "humanwings-dev"; 
-	
-	public final static String TEMP_TOPIC_NAME = "temp-topic";
+	public final static String TOPIC_NAME = "quickstart-events"; 
 	
 	public final static String GROUP_NAME = "GROUP_DEMO";
 

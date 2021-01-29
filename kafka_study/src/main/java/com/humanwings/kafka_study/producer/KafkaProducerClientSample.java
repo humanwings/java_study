@@ -11,7 +11,6 @@ import org.apache.kafka.clients.producer.RecordMetadata;
 import org.apache.kafka.common.serialization.StringSerializer;
 
 import com.humanwings.kafka_study.common.KafkaConstants;
-import com.humanwings.kafka_study.common.MessageInfo;
 
 public class KafkaProducerClientSample {
 

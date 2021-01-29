@@ -15,6 +15,8 @@ import com.humanwings.kafka_study.common.KafkaConstants;
 
 public class KafkaAdminClientSample {
 	
+	private final static String TEMP_TOPIC_NAME = "Topic-4-4";
+	
 	public static void main(String[] args) throws Exception{
 		// 
 
@@ -23,9 +25,9 @@ public class KafkaAdminClientSample {
 		System.out.println("---------------------------------------------------------------------");
 		System.out.println("Admin Client :" + client);
 		createTopics(client);
-		listTopics(client);
-		deleteTopic(client);
-		listTopics(client);
+		//listTopics(client);
+		//deleteTopic(client);
+		//listTopics(client);
 	}
 	
 	private static AdminClient adminClient() {
@@ -42,14 +44,14 @@ public class KafkaAdminClientSample {
 	 * Create Topic
 	 * @param client
 	 */
-	private static void createTopics(AdminClient client) {
+	private static void createTopics(AdminClient client) throws Exception{
 		
-		NewTopic topic = new NewTopic(KafkaConstants.TEMP_TOPIC_NAME, 1, (short)1);
+		NewTopic topic = new NewTopic(TEMP_TOPIC_NAME, 4, (short)4);
 		
-		CreateTopicsResult topics = client.createTopics(Arrays.asList(topic));
+		CreateTopicsResult result = client.createTopics(Arrays.asList(topic));
 		
 		System.out.println("---------------------------------------------------------------------");
-		System.out.println("Create topic result : " + topics);
+		System.out.println("Create topic result : " + result.all().get());
 		
 	}
 	
@@ -74,7 +76,7 @@ public class KafkaAdminClientSample {
 	 */
 	private static void deleteTopic(AdminClient client) throws Exception{
 		
-		DeleteTopicsResult result = client.deleteTopics(Arrays.asList(KafkaConstants.TEMP_TOPIC_NAME));
+		DeleteTopicsResult result = client.deleteTopics(Arrays.asList(TEMP_TOPIC_NAME));
 		
 		result.all().get();
 		
