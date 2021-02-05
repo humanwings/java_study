@@ -15,7 +15,7 @@ import com.humanwings.kafka_study.common.KafkaConstants;
 
 public class KafkaAdminClientSample {
 	
-	private final static String TEMP_TOPIC_NAME = "Topic-4-4";
+	private final static String TEMP_TOPIC_NAME = "Topic-3-3";
 	
 	public static void main(String[] args) throws Exception{
 		// 
@@ -24,8 +24,8 @@ public class KafkaAdminClientSample {
 		
 		System.out.println("---------------------------------------------------------------------");
 		System.out.println("Admin Client :" + client);
-		createTopics(client);
-		//listTopics(client);
+		//createTopics(client);
+		listTopics(client);
 		//deleteTopic(client);
 		//listTopics(client);
 	}
@@ -46,7 +46,7 @@ public class KafkaAdminClientSample {
 	 */
 	private static void createTopics(AdminClient client) throws Exception{
 		
-		NewTopic topic = new NewTopic(TEMP_TOPIC_NAME, 4, (short)4);
+		NewTopic topic = new NewTopic(TEMP_TOPIC_NAME, 3, (short)3);
 		
 		CreateTopicsResult result = client.createTopics(Arrays.asList(topic));
 		

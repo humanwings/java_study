@@ -24,15 +24,19 @@ public class KafkaProducerClientSample {
 		
 		properties.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
 		
-		properties.setProperty(ProducerConfig.RETRIES_CONFIG, "10");
+		//properties.setProperty(ProducerConfig.RETRIES_CONFIG, "0");
 		
 		properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, KafkaConstants.BOOTSTRAP_SERVERS);
+		
+		//properties.setProperty(ProducerConfig.ACKS_CONFIG, "all");
 		
 		KafkaProducer<String, String> producer = new KafkaProducer<>(properties);
 		
 		sendSynchronous(producer);
 		
 		sendAsynchronous(producer);
+		
+		sendMultiMessage(producer);
 		
 		producer.close();
 		
@@ -90,6 +94,33 @@ public class KafkaProducerClientSample {
 					
 				}
 			});
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	/**
+	   *  同步发送
+	 * @param producer
+	 */
+	private static void sendMultiMessage(KafkaProducer<String, String> producer) {
+		
+		System.out.println("------------ Synchronous Send----------------");
+		
+		try {
+			
+			for (int i=0 ; i < 10 ; i++) {
+				ProducerRecord<String, String> record = new ProducerRecord<String, String>(KafkaConstants.TOPIC_NAME, "key-"+i , "value-" + i);
+				
+				Future<RecordMetadata> dataFuture = producer.send(record);
+				
+				RecordMetadata daMetadata = dataFuture.get();
+				
+				System.out.println("key-" + i +",partition :" + daMetadata.partition() + ",offset :" + daMetadata.offset());
+			}
+			
 			
 		}catch(Exception e) {
 			e.printStackTrace();
